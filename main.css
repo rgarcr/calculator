@@ -1,0 +1,29 @@
+*{
+    box-sizing: border-box;
+}
+.calc-body{
+    margin: 0 auto;
+    width: 50%;
+    font-size: 32px;
+}
+
+.calc-body, .num-container, .input-container > div{
+    border: 2px solid black;
+
+}
+
+.num-container{
+    text-align: center;
+    height: 6vh; 
+}
+
+.input-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.input-container > div{
+    width: 25%;
+    text-align: center;
+}
