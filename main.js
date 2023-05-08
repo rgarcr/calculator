@@ -14,7 +14,7 @@ function multiply(num1, num2) {
     return num1 * num2;
 }
 function divide(num1, num2) {
-    if(num1 === 0 || num2=== 0)
+    if (num1 === 0 || num2 === 0)
         return alert("Can not divide 0")
     return num1 / num2;
 }
@@ -24,6 +24,7 @@ function operate(operator, num1, num2) {
 }
 
 let numDisplay = document.querySelector(".num-container");
+let numDisplayValue = '';
 document.querySelectorAll('.number').forEach(elem => elem.addEventListener('click', (e) => populate(e)));
 document.querySelectorAll(".operator").forEach(elem => elem.addEventListener('click', (e) => saveOperand(e.target.textContent)));
 document.querySelector('.equal').addEventListener('click', solve)
@@ -34,15 +35,23 @@ document.querySelector(".clear").addEventListener('click', () => {
     operator = ''
 })
 document.querySelector('.equal').addEventListener('click', solve);
+document.querySelector(".delete").addEventListener("click", deleteVal);
 
 function populate(e) {
-    console.log(isNaN(number2), number2)
-    if(!isNaN(number1) && isNaN(number2)){
+    //check if number1 has a number and number2 has no value, add value to number2
+    if (!isNaN(number1) && !number2) {
         numDisplay.textContent = e.target.textContent;
         number2 = numDisplay.textContent;
     }
-    else     
+    else if (numDisplay.textContent.includes('.') && e.target.textContent === '.')
+        return
+    else if (typeof (number1) === 'number') {
         numDisplay.textContent += e.target.textContent;
+        number2 = numDisplay.textContent;
+    }
+    else {
+        numDisplay.textContent += e.target.textContent;
+    }
 
 }
 
@@ -60,9 +69,26 @@ function solve() {
     number2 = Number(numDisplay.textContent);
     console.log(number1, number2, operator)
     if (!isNaN(number1) && !isNaN(number2) && operator) {
-        numDisplay.textContent = Math.round(operate(operator, number1, number2) *100) /100;
+        numDisplay.textContent = Math.round(operate(operator, number1, number2) * 100) / 100;
     }
     number1 = numDisplay.textContent;
     number2 = undefined;
     operator = '';
+}
+
+function deleteVal() {
+    if (number2) {
+        numDisplay.textContent = numDisplay.textContent.slice(0, -1);
+        number2 = numDisplay.textContent
+    }
+    else if (operator) {
+        operator = '';
+        number1 = number1.toString();
+    }
+    else if (numDisplay.textContent) {
+        numDisplay.textContent = numDisplay.textContent.slice(0, -1);
+    }
+    else {
+        return
+    }
 }
