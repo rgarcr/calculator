@@ -27,3 +27,10 @@
     width: 25%;
     text-align: center;
 }
+
+.input-container .clear{
+    width:60%;
+}
+.input-container .delete{
+    width:40%;
+}
