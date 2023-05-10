@@ -14,8 +14,6 @@ function multiply(num1, num2) {
     return num1 * num2;
 }
 function divide(num1, num2) {
-    if (num1 === 0 || num2 === 0)
-        return alert("Can not divide 0")
     return num1 / num2;
 }
 
@@ -28,12 +26,7 @@ let numDisplayValue = '';
 document.querySelectorAll('.number').forEach(elem => elem.addEventListener('click', (e) => populate(e)));
 document.querySelectorAll(".operator").forEach(elem => elem.addEventListener('click', (e) => saveOperand(e.target.textContent)));
 document.querySelector('.equal').addEventListener('click', solve)
-document.querySelector(".clear").addEventListener('click', () => {
-    numDisplay.textContent = '';
-    number1 = undefined;
-    number2 = undefined;
-    operator = ''
-})
+document.querySelector(".clear").addEventListener('click', clear)
 document.querySelector('.equal').addEventListener('click', solve);
 document.querySelector(".delete").addEventListener("click", deleteVal);
 
@@ -68,12 +61,26 @@ function saveOperand(str) {
 function solve() {
     number2 = Number(numDisplay.textContent);
     console.log(number1, number2, operator)
+    if(operator === divide)
+        if(number1 === 0 || number2 === 0){
+            alert('Cannot divide by 0')
+            clear();
+            return;
+        }
+
     if (!isNaN(number1) && !isNaN(number2) && operator) {
         numDisplay.textContent = Math.round(operate(operator, number1, number2) * 100) / 100;
     }
     number1 = numDisplay.textContent;
     number2 = undefined;
     operator = '';
+}
+
+function clear(){
+    numDisplay.textContent = '';
+    number1 = undefined;
+    number2 = undefined;
+    operator = ''
 }
 
 function deleteVal() {
