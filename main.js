@@ -27,7 +27,6 @@ document.querySelectorAll('.number').forEach(elem => elem.addEventListener('clic
 document.querySelectorAll(".operator").forEach(elem => elem.addEventListener('click', (e) => saveOperand(e.target.textContent)));
 document.querySelector('.equal').addEventListener('click', solve)
 document.querySelector(".clear").addEventListener('click', clear)
-document.querySelector('.equal').addEventListener('click', solve);
 document.querySelector(".delete").addEventListener("click", deleteVal);
 
 function populate(e) {
